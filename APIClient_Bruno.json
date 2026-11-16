@@ -1,0 +1,244 @@
+{
+  "name": "openEMR",
+  "version": "1",
+  "items": [
+    {
+      "type": "http",
+      "name": "API Registrationscopes",
+      "seq": 1,
+      "request": {
+        "url": "http://localhost:8300/oauth2/default/registration",
+        "method": "POST",
+        "headers": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"application_type\": \"private\",\n  \"redirect_uris\": [\n    \"http://localhost:3000\"\n  ],\n  \"post_logout_redirect_uris\": [\n    \"http://localhost:3000\"\n  ],\n  \"initiate_login_uri\": \"https://localhost:3000\",\n  \"client_name\": \"mirth-test\",\n  \"token_endpoint_auth_method\": \"client_secret_post\",\n  \"username\": \"admin\",\n  \"password\": \"pass\",\n  \"scope\": \"openid offline_access api:oemr api:fhir api:port user/allergy.read user/allergy.write user/appointment.read user/appointment.write user/dental_issue.read user/dental_issue.write user/document.read user/document.write user/drug.read user/encounter.read user/encounter.write user/facility.read user/facility.write user/immunization.read user/insurance.read user/insurance.write user/insurance_company.read user/insurance_company.write user/insurance_type.read user/list.read user/medical_problem.read user/medical_problem.write user/medication.read user/medication.write user/message.write user/patient.read user/patient.write user/practitioner.read user/practitioner.write user/prescription.read user/procedure.read user/soap_note.read user/soap_note.write user/surgery.read user/surgery.write user/transaction.read user/transaction.write user/vital.read user/vital.write user/AllergyIntolerance.read user/CareTeam.read user/Condition.read user/Coverage.read user/Encounter.read user/Immunization.read user/Location.read user/Medication.read user/MedicationRequest.read user/Observation.read user/Organization.read user/Organization.write user/Patient.read user/Patient.write user/Practitioner.read user/Practitioner.write user/PractitionerRole.read user/Procedure.read patient/encounter.read patient/patient.read patient/AllergyIntolerance.read patient/CareTeam.read patient/Condition.read patient/Coverage.read patient/Encounter.read patient/Immunization.read patient/MedicationRequest.read patient/Observation.read patient/Patient.read patient/Procedure.read\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {
+          "res": [
+            {
+              "name": "registration_client_uri",
+              "value": "",
+              "enabled": true,
+              "local": false
+            },
+            {
+              "name": "registration_access_token",
+              "value": "",
+              "enabled": true,
+              "local": false
+            },
+            {
+              "name": "client_secret",
+              "value": "",
+              "enabled": true,
+              "local": false
+            },
+            {
+              "name": "client_id",
+              "value": "",
+              "enabled": true,
+              "local": false
+            }
+          ]
+        },
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "API Request",
+      "seq": 4,
+      "request": {
+        "url": "http://localhost:8300/apis/default/fhir/Patient",
+        "method": "GET",
+        "headers": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "bearer",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": "{{access_token}}"
+          }
+        },
+        "script": {},
+        "vars": {
+          "req": [
+            {
+              "name": "access_token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxQmI4aHFyRUpkTzlSUUtfV3ZlMVhGTjhPZzRyM2d3STlCMllMeFZfRUVvIiwianRpIjoiYzI0YTEzZjc1NzM3ZTZmY2U5MmM3M2NmMWM0Zjc0NjI0ODlkM2VlODI1NGRmY2VkZTcyZWE5ZTc5MDU3NWY1ZDY5NDlhZmI1NDkxN2FlMDAiLCJpYXQiOjE3NjUwNDc0NTMuNzI5NDc5LCJuYmYiOjE3NjUwNDc0NTMuNzI5NDg0LCJleHAiOjE3NjUwNTEwNTMuNzE4MzA5LCJzdWIiOiJhMDczMDkyZC1jZjAyLTRkODEtOWMwOS1lOTY5ZTM1OTkzYzgiLCJzY29wZXMiOlsib3BlbmlkIiwiYXBpOm9lbXIiLCJhcGk6ZmhpciIsImFwaTpwb3J0IiwidXNlci9hbGxlcmd5LnJlYWQiLCJ1c2VyL2FsbGVyZ3kud3JpdGUiLCJ1c2VyL2FwcG9pbnRtZW50LnJlYWQiLCJ1c2VyL2FwcG9pbnRtZW50LndyaXRlIiwidXNlci9kZW50YWxfaXNzdWUucmVhZCIsInVzZXIvZGVudGFsX2lzc3VlLndyaXRlIiwidXNlci9kb2N1bWVudC5yZWFkIiwidXNlci9kb2N1bWVudC53cml0ZSIsInVzZXIvZHJ1Zy5yZWFkIiwidXNlci9lbmNvdW50ZXIucmVhZCIsInVzZXIvZW5jb3VudGVyLndyaXRlIiwidXNlci9mYWNpbGl0eS5yZWFkIiwidXNlci9mYWNpbGl0eS53cml0ZSIsInVzZXIvaW1tdW5pemF0aW9uLnJlYWQiLCJ1c2VyL2luc3VyYW5jZS5yZWFkIiwidXNlci9pbnN1cmFuY2Uud3JpdGUiLCJ1c2VyL2luc3VyYW5jZV9jb21wYW55LnJlYWQiLCJ1c2VyL2luc3VyYW5jZV9jb21wYW55LndyaXRlIiwidXNlci9pbnN1cmFuY2VfdHlwZS5yZWFkIiwidXNlci9saXN0LnJlYWQiLCJ1c2VyL21lZGljYWxfcHJvYmxlbS5yZWFkIiwidXNlci9tZWRpY2FsX3Byb2JsZW0ud3JpdGUiLCJ1c2VyL21lZGljYXRpb24ucmVhZCIsInVzZXIvbWVkaWNhdGlvbi53cml0ZSIsInVzZXIvbWVzc2FnZS53cml0ZSIsInVzZXIvcGF0aWVudC5yZWFkIiwidXNlci9wYXRpZW50LndyaXRlIiwidXNlci9wcmFjdGl0aW9uZXIucmVhZCIsInVzZXIvcHJhY3RpdGlvbmVyLndyaXRlIiwidXNlci9wcmVzY3JpcHRpb24ucmVhZCIsInVzZXIvcHJvY2VkdXJlLnJlYWQiLCJ1c2VyL3NvYXBfbm90ZS5yZWFkIiwidXNlci9zb2FwX25vdGUud3JpdGUiLCJ1c2VyL3N1cmdlcnkucmVhZCIsInVzZXIvc3VyZ2VyeS53cml0ZSIsInVzZXIvdml0YWwucmVhZCIsInVzZXIvdml0YWwud3JpdGUiLCJ1c2VyL0FsbGVyZ3lJbnRvbGVyYW5jZS5yZWFkIiwidXNlci9DYXJlVGVhbS5yZWFkIiwidXNlci9Db25kaXRpb24ucmVhZCIsInVzZXIvRW5jb3VudGVyLnJlYWQiLCJ1c2VyL0ltbXVuaXphdGlvbi5yZWFkIiwidXNlci9Mb2NhdGlvbi5yZWFkIiwidXNlci9NZWRpY2F0aW9uLnJlYWQiLCJ1c2VyL01lZGljYXRpb25SZXF1ZXN0LnJlYWQiLCJ1c2VyL09ic2VydmF0aW9uLnJlYWQiLCJ1c2VyL09yZ2FuaXphdGlvbi5yZWFkIiwidXNlci9Pcmdhbml6YXRpb24ud3JpdGUiLCJ1c2VyL1BhdGllbnQucmVhZCIsInVzZXIvUGF0aWVudC53cml0ZSIsInVzZXIvUHJhY3RpdGlvbmVyLnJlYWQiLCJ1c2VyL1ByYWN0aXRpb25lci53cml0ZSIsInVzZXIvUHJhY3RpdGlvbmVyUm9sZS5yZWFkIiwidXNlci9Qcm9jZWR1cmUucmVhZCIsInBhdGllbnQvZW5jb3VudGVyLnJlYWQiLCJwYXRpZW50L3BhdGllbnQucmVhZCIsInBhdGllbnQvRW5jb3VudGVyLnJlYWQiLCJwYXRpZW50L1BhdGllbnQucmVhZCIsInNpdGU6ZGVmYXVsdCJdfQ.kQH8MkUzLWbD13r0-rH5z2u-HlYI0xZWqvrOClJJloyM_EPIBBrK6xTh8vBoffqt7ZzFgD1gCj76Jx1FDmwCiRdKCvjexTeqSRVTsE-6rwOpmhGEjW_ozo_MwTZQ7NGP0LtrvOpf5E2aE_vgWHLO_vd0bZTpf8z0H2enhJ4vm3WBZ0LWOq4_8NxROsQkzt_lguIStUzBmuLfvT7vk5SU2y7j7jWEAVQO4qFyGXNzFFlPZCXJOUnHJ072qwzHemvbe4m3hk-eWLh8p7Ux8v4vZwSIpZ2pUFR8XtKXV0qTXKfTjt1eAb2YFHLQ9GFrzQbWYGB9AEVrSzddID7Nyq9Ekw",
+              "enabled": true,
+              "local": false
+            },
+            {
+              "name": "id_token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxQmI4aHFyRUpkTzlSUUtfV3ZlMVhGTjhPZzRyM2d3STlCMllMeFZfRUVvIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MzAwL29hdXRoMi9kZWZhdWx0IiwiaWF0IjoxNzY1MDQ3NDUzLCJleHAiOjE3NjUwNTEwNTMsInN1YiI6ImEwNzMwOTJkLWNmMDItNGQ4MS05YzA5LWU5NjllMzU5OTNjOCIsImFwaTpvZW1yIjp0cnVlLCJhcGk6ZmhpciI6dHJ1ZSwiYXBpOnBvcnQiOnRydWV9.sXuX__tyUYLpXS18dkzz6s5d55ULSwNEeyI1qS-NVtPEc-KFBpLAV483YdJEW_yaE4dk3f4Gho3bNCJnAcBSsNYrLIWq6nvXCnDosuAMfEerRm48deSXlnLa_0hWvoVWgWTN-9rKNSw2fifJ_pf4HeWE6Tx87URAaa8AxkQmxr2sPXxsmA6yn8AyXOw-cgaeg1FPPuLrwsP0t5YMBuCWO_Pl0AEdT9Kh3P-CWb_5FTrsBydMEo7SagtIboSRXKhf8brZxvqAHFONwMksQXhlFOi2Yffgxe62Gy45i8j0IbYBd4eL0ibbm256aW6BXvGyLUBBVWkCPK1I5o6xKQlEYA",
+              "enabled": false,
+              "local": false
+            }
+          ]
+        },
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "IPS Request",
+      "seq": 3,
+      "request": {
+        "url": "http://localhost:80/Patient/identifier=2",
+        "method": "GET",
+        "headers": [],
+        "body": {
+          "mode": "json",
+          "json": "{ \"client_id\": \"{{client_id}}\" }",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {
+          "req": [
+            {
+              "name": "client_id",
+              "value": "1Bb8hqrEJdO9RQK_Wve1XFN8Og4r3gwI9B2YLxV_EEo",
+              "enabled": true,
+              "local": false
+            }
+          ]
+        },
+        "assertions": [],
+        "tests": "",
+        "query": [
+          {
+            "name": "_pretty",
+            "value": "true",
+            "enabled": false
+          }
+        ]
+      }
+    },
+    {
+      "type": "http",
+      "name": "Password",
+      "seq": 2,
+      "request": {
+        "url": "http://localhost:8300/oauth2/default/token",
+        "method": "POST",
+        "headers": [],
+        "body": {
+          "mode": "formUrlEncoded",
+          "formUrlEncoded": [
+            {
+              "name": "client_id",
+              "value": "{{client_id}}",
+              "enabled": true
+            },
+            {
+              "name": "grant_type",
+              "value": "password",
+              "enabled": true
+            },
+            {
+              "name": "user_role",
+              "value": "users",
+              "enabled": true
+            },
+            {
+              "name": "scope",
+              "value": "openid api:oemr api:fhir api:port user/allergy.read user/allergy.write user/appointment.read user/appointment.write user/dental_issue.read user/dental_issue.write user/document.read user/document.write user/drug.read user/encounter.read user/encounter.write user/facility.read user/facility.write user/immunization.read user/insurance.read user/insurance.write user/insurance_company.read user/insurance_company.write user/insurance_type.read user/list.read user/medical_problem.read user/medical_problem.write user/medication.read user/medication.write user/message.write user/patient.read user/patient.write user/practitioner.read user/practitioner.write user/prescription.read user/procedure.read user/soap_note.read user/soap_note.write user/surgery.read user/surgery.write user/vital.read user/vital.write user/AllergyIntolerance.read user/CareTeam.read user/Condition.read user/Encounter.read user/Immunization.read user/Location.read user/Medication.read user/MedicationRequest.read user/Observation.read user/Organization.read user/Organization.write user/Patient.read user/Patient.write user/Practitioner.read user/Practitioner.write user/PractitionerRole.read user/Procedure.read patient/encounter.read patient/patient.read patient/Encounter.read patient/Patient.read",
+              "enabled": true
+            },
+            {
+              "name": "username",
+              "value": "admin",
+              "enabled": true
+            },
+            {
+              "name": "password",
+              "value": "pass",
+              "enabled": true
+            }
+          ],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {
+          "req": [
+            {
+              "name": "registration_client_uri",
+              "value": "http://localhost:8300/oauth2/default/client/aZYy3P4YWfGMgpYoDL9-gg",
+              "enabled": true,
+              "local": false
+            },
+            {
+              "name": "registration_access_token",
+              "value": "n938Gc4UHklO598-xHZEKyWwnIZxk3aCMpptVfl2iSk",
+              "enabled": true,
+              "local": false
+            },
+            {
+              "name": "client_secret",
+              "value": "AELYUN0VUOJqlq4ET_E6bDvFIAMSLC_IHu2B4_tPa9HC494zbiXbIAOlhE2YhbMSy_CAnW8QByQ91dPTvTynAQ",
+              "enabled": true,
+              "local": false
+            },
+            {
+              "name": "client_id",
+              "value": "1Bb8hqrEJdO9RQK_Wve1XFN8Og4r3gwI9B2YLxV_EEo",
+              "enabled": true,
+              "local": false
+            }
+          ]
+        },
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    }
+  ],
+  "environments": []
+}
